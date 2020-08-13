@@ -1,0 +1,24 @@
+.card__img {
+    min-height: 272px;
+    background-size: cover;
+    
+}
+
+#c1 {
+    background-image: url('../../../../images/image_08.jpg');
+}
+#c2 {
+    background-image: url('../../../../images/image_01.jpg');
+}
+#c3 {
+    background-image: url('../../../../images/image_04.jpg');
+}
+#c4 {
+    background-image: url('../../../../images/image_05.jpg');
+}
+#c5 {
+    background-image: url('../../../../images/image_06.jpg');
+}
+#c6 {
+    background-image: url('../../../../images/image_07.jpg');
+}

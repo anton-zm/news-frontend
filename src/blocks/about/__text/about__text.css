@@ -1,0 +1,5 @@
+.about__text {
+    margin: 51px auto auto 56px;
+    display: flex;
+    flex-direction: column;
+}
