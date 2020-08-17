@@ -1,17 +1,18 @@
 .header__link {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
-    color: #B6BCBF;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    margin-left: 34px;
-    min-height: 80px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-left: 34px;
+  min-height: 80px;
+  box-sizing: border-box;
 }
 .header__link_active {
-    color: #FFFFFF;
-    border-bottom: 3px solid white;
+  color: #ffffff;
+  border-bottom: 3px solid white;
 }
