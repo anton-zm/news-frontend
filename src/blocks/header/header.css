@@ -8,10 +8,17 @@
 @import url('./__subtitle/header__subtitle.css');
 @import url('./__title/header__title.css');
 
-.header{
-    background-image: url('../../../images/banner.jpg');
-    background-size: cover;
-    padding-bottom: 80px;
-    background-attachment: fixed;
+.header {
+  background-image: url('../../../images/banner.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 80px;
+  background-attachment: fixed;
 }
 
+@media screen and (max-width: 768px) {
+  .header {
+    padding-bottom: 48px;
+    background-size: contain;
+  }
+}

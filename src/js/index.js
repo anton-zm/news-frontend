@@ -1,6 +1,6 @@
-import './style.css';
+import '../css/index.css';
 
-import Popup from './js/Popup';
+import Popup from './Popup';
 
 const authBtn = document.querySelector('#auth-btn');
 const copyrigth = document.querySelector('.footer__copyright');
