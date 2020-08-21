@@ -64,15 +64,15 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: './src/index.html',
+      template: './src/pages/index.html',
       filename: 'index.html',
       chunks: ['main'],
       minify: false,
     }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: './src/articles/index.html',
-      filename: 'articles/index.html',
+      template: './src/pages/articles.html',
+      filename: 'articles.html',
       chunks: ['articles'],
       minify: false,
     }),

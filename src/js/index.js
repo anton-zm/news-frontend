@@ -24,7 +24,7 @@ const successPopup = new Popup(success);
 const headerMenu = document.querySelector('.header__menu');
 
 const signedMenu = `<a href="/" class="header__link header__link_active">Главная</a>
-<a href="/articles" class="header__link">Сохранённые статьи</a>
+<a href="./articles.html" class="header__link">Сохранённые статьи</a>
 <button class="header__button header__button-icon" id="exit">Антон</button>`;
 
 const notSignedMenu = `<a href="" class="header__link header__link_active">Главная</a>
