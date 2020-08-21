@@ -9,8 +9,8 @@
     <meta name="author" content="Антон Змановский">
     <title>Диплом</title>
     <link rel="shortcut icon" href="<%=require('../images/favicon.ico').default%>">
-    <!-- <link rel="shortcut icon" href="../images/favicon.ico"> -->
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>">
+
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                 <button class="header__button" id="auth-btn" >Авторизоваться</button>
             </nav>
             <div class="header__menu-icon " id="mobile-menu-icon">
-              <img src="../images/menu.svg" alt="Меню">
+              <img src="<%=require('../images/menu.svg').default%>" alt="Меню">
             </div>
         </div>
         <div class="mobile-menu">
@@ -30,7 +30,7 @@
             <div class="content">
               <div class="mobile-menu__head">
                 <p class="header__logo">NewsExplorer</p>
-                <img src="./images/close.png" alt="Закрыть" id="mobile-cross" class="mobile-menu__icon" >
+                <img src="<%=require('../images/close.png').default%>" alt="Закрыть" id="mobile-cross" class="mobile-menu__icon" >
               </div>
               <div class="mobile-menu__line"></div>
               <nav class="mobile-menu__nav">
@@ -69,7 +69,7 @@
                         <div class="card__img" id="c1">
                             <div class="card__save-container">
                                 <button class="card__button">
-                                    <img src="../images/save.svg" alt="Сохранить статью"
+                                    <img src="<%=require('../images/save.svg').default%>" alt="Сохранить статью"
                                         class="card__button-img">
                                 </button>
                             </div>
@@ -86,7 +86,7 @@
                             <div class="card__save-container">
 
                                 <button class="card__button">
-                                    <img src="../images/savemarked.svg" alt="Сохранить статью" class="card__button-img">
+                                    <img src="<%=require('../images/savemarked.svg').default%>" alt="Сохранить статью" class="card__button-img">
                                 </button>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                             <div class="card__save-container">
                                 <button class="card__button">Войдите, чтобы сохранять статьи</button>
                                 <button class="card__button">
-                                    <img src="../images/savehover.svg" alt="Сохранить статью" class="card__button-img">
+                                    <img src="<%=require('../images/savehover.svg').default%>" alt="Сохранить статью" class="card__button-img">
                                 </button>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                         <div class="card__img" id="c4">
                             <div class="card__save-container">
                                 <button class="card__button">
-                                    <img src="../images/save.svg" alt="Сохранить статью"
+                                    <img src="<%=require('../images/save.svg').default%>" alt="Сохранить статью"
                                         class="card__button-img">
                                 </button>
                             </div>
@@ -133,7 +133,7 @@
                         <div class="card__img" id="c5">
                             <div class="card__save-container">
                                 <button class="card__button">
-                                    <img src="../images/save.svg" alt="Сохранить статью"
+                                    <img src="<%=require('../images/save.svg').default%>" alt="Сохранить статью"
                                         class="card__button-img">
                                 </button>
                             </div>
@@ -150,7 +150,7 @@
                             <div class="card__save-container">
                                 <button class="card__button">Войдите, чтобы сохранять статьи</button>
                                 <button class="card__button">
-                                    <img src="../images/save.svg" alt="Сохранить статью"
+                                    <img src="<%=require('../images/save.svg').default%>" alt="Сохранить статью"
                                         class="card__button-img">
                                 </button>
                             </div>
@@ -170,9 +170,9 @@
         <section class="about">
             <div class="content about__content">
                 <picture >
-                  <source srcset="../images/meTablet.jpg" media="(max-width: 768px)">
-                  <source srcset="../images/meMobile.jpg" media="(max-width: 420px)">
-                  <img src="../images/me.jpg" alt="Портрет автора" class="about__img" >
+                  <source srcset="<%=require('../images/meTablet.jpg').default%>" media="(max-width: 768px)">
+                  <source srcset="<%=require('../images/meMobile.jpg').default%>" media="(max-width: 420px)">
+                  <img src="<%=require('../images/me.jpg').default%>" alt="Портрет автора" class="about__img" >
                 </picture>
                 <div class="about__text">
                     <h2 class="content-title">Об авторе</h2>
@@ -185,7 +185,7 @@
         </section>
         <div class="popup" id="sign-in-popup">
             <form class="popup__form" id="sign-in-form">
-                <img src="../images/close.png" alt="" class="popup__cross">
+                <img src="<%=require('../images/close.png').default%>" alt="" class="popup__cross">
                 <h3 class="popup__title">Вход</h3>
                 <p class="popup__label">Email</p>
                 <input name="email" type="text" class="popup__input" placeholder="Введите почту" required>
@@ -201,7 +201,7 @@
         </div>
         <div class="popup" id="sign-up-popup">
             <form class="popup__form" id="sign-up-form">
-                <img src="../images/close.png" alt="" class="popup__cross">
+                <img src="<%=require('../images/close.png').default%>" alt="" class="popup__cross">
                 <h3 class="popup__title">Регистрация</h3>
                 <p  class="popup__label">Email</p>
                 <input name="email" type="text" class="popup__input" placeholder="Введите почту" required>
@@ -222,7 +222,7 @@
         </div>
         <div class="popup" id="success-popup">
             <form class="popup__form" id="success-form">
-                <img src="../images/close.png" alt="" class="popup__cross">
+                <img src="<%=require('../images/close.png').default%>" alt="" class="popup__cross">
                 <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
                 <p class="popup__call popap__call_default" id="success-link"><span
                         class="popup__link popup__link_to-signin">Выполнить
@@ -246,12 +246,12 @@
           <ul class="footer__socials">
             <li class="footer__social">
               <a href="https://github.com/anton-zm" target="_blank">
-                  <img src="../images/gh.png" alt="github" class="footer__icon">
+                  <img src="<%=require('../images/gh.png').default%>" alt="github" class="footer__icon">
               </a>
           </li>
           <li class="footer__social">
               <a href="https://t.me/Antonzm" target="_blank" class="footer__social-container">
-                  <img src="../images/tlg.png" alt="telegram" class="footer__icon">
+                  <img src="<%=require('../images/tlg.png').default%>" alt="telegram" class="footer__icon">
               </a>
           </li>
           </ul>
