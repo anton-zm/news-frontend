@@ -1,9 +1,11 @@
 import '../css/index.css';
 
+import insertCurrentDate from './copyright';
 import Popup from './Popup';
 
 const authBtn = document.querySelector('#auth-btn');
-const copyrigth = document.querySelector('.footer__copyright');
+const authMobileBtn = document.querySelector('#auth-mobile-btn');
+
 const techContainer = document.querySelector('.tech');
 const signupButton = document.querySelector('#signup-btn');
 const signinButton = document.querySelector('#signin-btn');
@@ -11,6 +13,9 @@ const signinForm = document.querySelector('#sign-in-popup');
 const signupForm = document.querySelector('#sign-up-popup');
 const success = document.querySelector('#success-popup');
 const signupLink = document.querySelector('#popup__signup-link');
+const menuBtn = document.querySelector('#mobile-menu-icon');
+const menuCross = document.querySelector('#mobile-cross');
+const mobileMenu = document.querySelector('.mobile-menu');
 
 const signinPopup = new Popup(signinForm);
 const signupPopup = new Popup(signupForm);
@@ -24,6 +29,12 @@ const signedMenu = `<a href="/" class="header__link header__link_active">Гла�
 
 const notSignedMenu = `<a href="" class="header__link header__link_active">Главная</a>
 <button class="header__button" id="auth-btn" >Авторизоваться</button>`;
+
+// меню для мобилок
+
+function mobileMenuHandler() {
+  mobileMenu.classList.toggle('mobile-menu_opened');
+}
 
 // меняет шапку хэдера
 
@@ -63,6 +74,9 @@ techContainer.addEventListener('click', (e) => {
 authBtn.addEventListener('click', () => {
   signinPopup.open();
 });
+authMobileBtn.addEventListener('click', () => {
+  signinPopup.open();
+});
 
 window.addEventListener('click', (event) => {
   if (event.target.classList.contains('popup__link_to-signin')) {
@@ -94,5 +108,9 @@ window.addEventListener('click', (event) => {
   }
 });
 
+// mobile menu
+menuBtn.addEventListener('click', mobileMenuHandler);
+menuCross.addEventListener('click', mobileMenuHandler);
+
 // copyrigth
-copyrigth.textContent = `© ${new Date().getFullYear()} Supersite, Powered by News API`;
+insertCurrentDate();

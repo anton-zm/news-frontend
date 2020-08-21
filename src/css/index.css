@@ -11,7 +11,15 @@
 @import url('../blocks/content-title/content-title.css');
 @import url('../blocks/tech/tech.css');
 @import url('../blocks/popup/popup.css');
+@import url('../blocks/mobile-menu/mobile-menu.css');
 
-body{
+body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
 }

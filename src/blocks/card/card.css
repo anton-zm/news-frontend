@@ -8,11 +8,11 @@
 @import url('./__link/card__link.css');
 
 .card {
-    background: #FFFFFF;
-    border-radius: 16px;
-    position: relative;
-    overflow: hidden;
-    padding-bottom: 24px;
-    display: flex;
-    flex-direction: column;
+  background: #ffffff;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
 }

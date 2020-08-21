@@ -7,18 +7,32 @@
 @import url('./__menu/header__menu.css');
 @import url('./__subtitle/header__subtitle.css');
 @import url('./__title/header__title.css');
+@import url('./__menu-icon/header__menu-icon.css');
+@import url('./__mobile/header__mobile.css');
+@import url('./__mobile-container/header__mobile-container.css');
 
 .header {
   background-image: url('../../../images/banner.jpg');
-  background-size: cover;
+  background-size: auto 100%;
   background-repeat: no-repeat;
   padding-bottom: 80px;
   background-attachment: fixed;
 }
 
+.header_articles {
+  padding-bottom: 0;
+  background-image: none;
+}
+
 @media screen and (max-width: 768px) {
   .header {
     padding-bottom: 48px;
-    background-size: contain;
+    background-attachment: unset;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    padding-bottom: 32px;
   }
 }

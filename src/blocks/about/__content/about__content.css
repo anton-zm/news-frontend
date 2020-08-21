@@ -1,4 +1,9 @@
-.about__content{
-    display: flex;
-    flex-direction: row;
+.about__content {
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 320px) {
+  .about__content {
+    flex-direction: column;
+  }
 }

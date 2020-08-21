@@ -1,0 +1,7 @@
+@import url('./__title/saved-headings__title.css');
+@import url('./__amount/saved-headings__amount.css');
+@import url('./__keywords/saved-headings__keywords.css');
+
+.saved-headings {
+  padding-bottom: 56px;
+}

@@ -1,6 +1,23 @@
 .result__container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr );
-    gap: 16px;
-    margin: 64px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 64px 0 0;
+}
+
+.result__container_articles {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) and (min-width: 630px) {
+  .result__container {
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .result__container {
+    gap: 10px;
+    grid-template-columns: 1fr;
+  }
 }

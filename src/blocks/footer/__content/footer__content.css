@@ -1,6 +1,11 @@
 .footer__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 420px) {
+  .footer__content {
+    flex-direction: column;
+  }
 }

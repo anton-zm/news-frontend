@@ -1,0 +1,21 @@
+.saved-headings__title {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 27, 34, 0.5);
+  margin: 40px auto 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .saved-headings__title {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+@media screen and (max-width: 320px) {
+  .saved-headings__title {
+    font-size: 12px;
+  }
+}

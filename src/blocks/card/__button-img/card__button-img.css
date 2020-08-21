@@ -1,4 +1,6 @@
-.card__button-img:hover {
-    width: 14px;
-    height: 19px;
+.card__button-img {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
 }

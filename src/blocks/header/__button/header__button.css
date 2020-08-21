@@ -5,7 +5,7 @@
   border-radius: 100px;
   background-color: transparent;
   padding: 12px;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -17,6 +17,11 @@
   align-items: center;
 }
 
+.header__button_articles {
+  color: #1a1b22;
+  border: 1px solid #1a1b22;
+}
+
 .header__button-icon {
 }
 
@@ -24,4 +29,28 @@
   content: url('../../../../images/logout.png');
   margin-left: 5px;
   transform: translateY(5px);
+}
+
+.header__button-icon_articles {
+}
+
+.header__button-icon_articles::after {
+  content: url('../../../../images/logout.svg');
+  margin-left: 5px;
+  transform: translateY(5px);
+}
+
+@media screen and (max-width: 768px) {
+  .header__button {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__button {
+    font-size: 18px;
+    width: 100%;
+    margin-left: 0;
+    display: block;
+  }
 }

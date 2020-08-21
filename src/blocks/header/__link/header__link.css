@@ -1,5 +1,5 @@
 .header__link {
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -15,4 +15,24 @@
 .header__link_active {
   color: #ffffff;
   border-bottom: 3px solid white;
+}
+.header__link_theme_light {
+  color: #1a1b22;
+}
+.header__link_active_theme_light {
+  border-bottom: 3px solid #1a1b22;
+}
+
+@media screen and (max-width: 768px) {
+  .header__link {
+    font-size: 16px;
+    min-height: 66px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__link {
+    color: #ffffff;
+    margin-left: 0;
+  }
 }

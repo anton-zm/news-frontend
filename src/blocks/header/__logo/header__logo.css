@@ -1,8 +1,18 @@
 .header__logo {
-    font-family: Roboto Slab;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
-    color: #FFFFFF;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.header__logo_theme_light {
+  color: #1a1b22;
+}
+
+@media screen and (max-width: 320px) {
+  .header__logo {
+    font-size: 16px;
+  }
 }

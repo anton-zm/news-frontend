@@ -67,12 +67,14 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
       chunks: ['main'],
+      minify: false,
     }),
     new HtmlWebpackPlugin({
       inject: false,
       template: './src/articles/index.html',
       filename: 'articles/index.html',
       chunks: ['articles'],
+      minify: false,
     }),
     new WebpackMd5Hash(),
     new webpack.DefinePlugin({
