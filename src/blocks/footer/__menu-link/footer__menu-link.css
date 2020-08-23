@@ -15,7 +15,7 @@
 .footer__menu-link:hover {
   opacity: 0.8;
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 525px) {
   .footer__menu-link {
     line-height: 48px;
     text-align: left;

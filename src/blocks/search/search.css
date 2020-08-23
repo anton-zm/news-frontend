@@ -21,7 +21,7 @@
   }
 }
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 525px) {
   .search {
     flex-direction: column;
     height: 128px;
