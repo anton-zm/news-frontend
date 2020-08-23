@@ -1,6 +1,12 @@
 .popup__cross {
-    position: absolute;
-    top: -46px;
-    right: -46px;
-    cursor: pointer;
+  position: absolute;
+  top: -46px;
+  right: -46px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__cross {
+    display: none;
+  }
 }

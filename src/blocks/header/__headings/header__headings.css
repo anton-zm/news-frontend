@@ -10,6 +10,11 @@
     margin: 38px auto 0;
   }
 }
+@media screen and (max-width: 500px) {
+  .header__headings {
+    width: 80%;
+  }
+}
 
 @media screen and (max-width: 320px) {
   .header__headings {

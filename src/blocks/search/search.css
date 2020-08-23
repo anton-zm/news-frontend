@@ -21,10 +21,11 @@
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 440px) {
   .search {
     flex-direction: column;
     height: 128px;
+    width: 100%;
     background: none;
     backdrop-filter: none;
     border-radius: 0;

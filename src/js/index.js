@@ -16,6 +16,7 @@ const signupLink = document.querySelector('#popup__signup-link');
 const menuBtn = document.querySelector('#mobile-menu-icon');
 const menuCross = document.querySelector('#mobile-cross');
 const mobileMenu = document.querySelector('.mobile-menu');
+const popup = document.querySelector('.popup');
 
 const signinPopup = new Popup(signinForm);
 const signupPopup = new Popup(signupForm);
@@ -100,12 +101,16 @@ signupButton.addEventListener('click', (event) => {
   signupPopup.close();
 });
 
-// закрывает попап
+// закрывают попап
 window.addEventListener('click', (event) => {
   if (event.target.classList.contains('popup__cross')) {
     const popup = event.target.parentElement.parentElement;
     popup.classList.remove('popup_is-opened');
   }
+});
+
+popup.addEventListener('click', (event) => {
+  event.target.classList.remove('popup_is-opened');
 });
 
 // mobile menu

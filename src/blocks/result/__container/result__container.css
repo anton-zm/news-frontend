@@ -9,7 +9,7 @@
   margin: 0;
 }
 
-@media screen and (max-width: 768px) and (min-width: 630px) {
+@media screen and (max-width: 768px) {
   .result__container {
     gap: 8px;
   }
@@ -17,7 +17,13 @@
 
 @media screen and (max-width: 620px) {
   .result__container {
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 490px) and (max-width: 619px) {
+  .result__container {
+    gap: 8px;
     grid-template-columns: 1fr;
   }
 }
