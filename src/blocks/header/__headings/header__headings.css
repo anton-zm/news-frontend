@@ -1,0 +1,24 @@
+.header__headings {
+  width: 608px;
+  margin: 80px auto 0;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .header__headings {
+    width: 448px;
+    margin: 38px auto 0;
+  }
+}
+@media screen and (max-width: 500px) {
+  .header__headings {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__headings {
+    width: 100%;
+    margin: 30px 0 0;
+  }
+}

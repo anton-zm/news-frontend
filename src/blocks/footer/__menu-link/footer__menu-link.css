@@ -1,0 +1,24 @@
+.footer__menu-link {
+  text-decoration: none;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #1a1b22;
+  margin-left: 30px;
+  transition: 0.3s;
+  padding: 0;
+}
+
+.footer__menu-link:hover {
+  opacity: 0.8;
+}
+@media screen and (max-width: 525px) {
+  .footer__menu-link {
+    line-height: 48px;
+    text-align: left;
+    margin-left: 0;
+  }
+}

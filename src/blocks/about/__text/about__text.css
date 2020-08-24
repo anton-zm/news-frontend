@@ -1,0 +1,19 @@
+.about__text {
+  margin: 51px auto auto 56px;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+@media screen and (max-width: 768px) {
+  .about__text {
+    margin: 0 auto auto 32px;
+    max-width: 424px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about__text {
+    margin: 24px auto auto 0;
+  }
+}

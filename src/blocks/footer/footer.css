@@ -1,0 +1,14 @@
+@import url('./__content/footer__content.css');
+@import url('./__copyright/footer__copyright.css');
+@import url('./__menu/footer__menu.css');
+@import url('./__menu-link/footer__menu-link.css');
+@import url('./__icon/footer__icon.css');
+@import url('./__menu-item/footer__menu-item.css');
+@import url('./__list-item/footer__list-item.css');
+@import url('./__social/footer__social.css');
+@import url('./__socials/footer__socials.css');
+@import url('./__social-container/footer__social-container.css');
+
+.footer {
+  padding: 30px 0;
+}

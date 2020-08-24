@@ -1,0 +1,8 @@
+.about__img {
+  border-radius: 50%;
+}
+@media screen and (max-width: 320px) {
+  .about__img {
+    width: 272px;
+  }
+}

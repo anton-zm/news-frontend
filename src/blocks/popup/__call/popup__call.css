@@ -1,0 +1,12 @@
+.popup__call {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+}
+.popap__call_default {
+    text-align: left;
+}

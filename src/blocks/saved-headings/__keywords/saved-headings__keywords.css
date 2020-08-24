@@ -1,0 +1,24 @@
+.saved-headings__keywords {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b22;
+  margin: 30px auto 0 0;
+}
+.saved-headings__keywords_keyword {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .saved-headings__keywords {
+    font-size: 14px;
+    margin: 16px auto 0 0;
+  }
+}
+@media screen and (max-width: 320px) and (max-width: 767px) {
+  .saved-headings__keywords {
+    font-size: 18px;
+  }
+}

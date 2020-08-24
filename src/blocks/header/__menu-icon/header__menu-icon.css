@@ -1,0 +1,15 @@
+.header__menu-icon {
+  width: 24px;
+  height: 24px;
+  display: none;
+  box-sizing: border-box;
+}
+.header__menu-icon_disabled {
+  display: none;
+}
+
+@media screen and (max-width: 620px) {
+  .header__menu-icon {
+    display: block;
+  }
+}

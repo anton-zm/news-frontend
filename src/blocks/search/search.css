@@ -1,0 +1,36 @@
+@import url('./__button/search__button.css');
+@import url('./__input/search__input.css');
+
+.search {
+  border: 1px solid #d1d2d6;
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+  border-radius: 100px;
+  height: 68px;
+  margin-top: 64px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    backdrop-filter: blur(100px);
+    height: 56px;
+    margin-top: 48px;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .search {
+    flex-direction: column;
+    height: 128px;
+    width: 100%;
+    background: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    border: none;
+    justify-content: space-between;
+    margin-top: 122px;
+  }
+}

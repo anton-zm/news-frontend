@@ -1,0 +1,9 @@
+.about__content {
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (max-width: 490px) {
+  .about__content {
+    flex-direction: column;
+  }
+}

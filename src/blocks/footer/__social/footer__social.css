@@ -1,0 +1,9 @@
+.footer__social {
+  line-height: 48px;
+}
+
+@media screen and (max-width: 525px) {
+  .footer__social {
+    line-height: 48px;
+  }
+}

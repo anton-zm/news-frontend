@@ -1,0 +1,25 @@
+@import url('../vendor/fonts.css');
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/header/header.css');
+@import url('../blocks/content/content.css');
+@import url('../blocks/card/card.css');
+@import url('../blocks/about/about.css');
+@import url('../blocks/result/result.css');
+@import url('../blocks/card/card.css');
+@import url('../blocks/preloader/preloader.css');
+@import url('../blocks/search/search.css');
+@import url('../blocks/content-title/content-title.css');
+@import url('../blocks/tech/tech.css');
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/mobile-menu/mobile-menu.css');
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
