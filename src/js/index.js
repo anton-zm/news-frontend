@@ -1,11 +1,11 @@
 import '../css/index.css';
 
 import insertCurrentDate from './utils/copyright';
+import DOM from './constants/DOM';
 import Popup from './components/Popup';
 
 const authBtn = document.querySelector('#auth-btn');
 const authMobileBtn = document.querySelector('#auth-mobile-btn');
-
 const techContainer = document.querySelector('.tech');
 const signupButton = document.querySelector('#signup-btn');
 const signinButton = document.querySelector('#signin-btn');

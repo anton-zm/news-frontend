@@ -1,0 +1,16 @@
+export default {
+  authBtn = document.querySelector('#auth-btn'),
+  authMobileBtn = document.querySelector('#auth-mobile-btn'),
+  techContainer = document.querySelector('.tech'),
+  signupButton = document.querySelector('#signup-btn'),
+  signinButton = document.querySelector('#signin-btn'),
+  signinForm = document.querySelector('#sign-in-popup'),
+  signupForm = document.querySelector('#sign-up-popup'),
+  success = document.querySelector('#success-popup'),
+  signupLink = document.querySelector('#popup__signup-link'),
+  menuBtn = document.querySelector('#mobile-menu-icon'),
+  menuCross = document.querySelector('#mobile-cross'),
+  mobileMenu = document.querySelector('.mobile-menu'),
+  popup = document.querySelector('.popup'),
+  headerMenu = document.querySelector('.header__menu'),
+};
