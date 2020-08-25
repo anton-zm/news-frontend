@@ -1,7 +1,7 @@
 import '../css/index.css';
 
-import insertCurrentDate from './copyright';
-import Popup from './Popup';
+import insertCurrentDate from './utils/copyright';
+import Popup from './components/Popup';
 
 const authBtn = document.querySelector('#auth-btn');
 const authMobileBtn = document.querySelector('#auth-mobile-btn');

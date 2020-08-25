@@ -1,5 +1,5 @@
 import '../css/articles.css';
-import insertCurrentDate from './copyright';
+import insertCurrentDate from './utils/copyright';
 
 const menuBtn = document.querySelector('#mobile-menu-icon');
 const menuCross = document.querySelector('#mobile-cross');

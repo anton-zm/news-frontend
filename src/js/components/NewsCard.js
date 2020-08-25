@@ -1,0 +1,4 @@
+class NewsCard {
+  constructor() {}
+  renderIcon() {}
+}
