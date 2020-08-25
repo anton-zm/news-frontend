@@ -1,8 +1,16 @@
 import '../css/index.css';
 
 import insertCurrentDate from './utils/copyright';
-import DOM from './constants/DOM';
+
+// classes
+
 import Popup from './components/Popup';
+import NewsCardList from './components/NewsCardList';
+import NewsCard from './components/NewsCard';
+import MainApi from './api/MainApi';
+import NewsApi from './api/NewsApi';
+import DOM from './constants/DOM';
+import Form from './components/Form';
 
 const authBtn = document.querySelector('#auth-btn');
 const authMobileBtn = document.querySelector('#auth-mobile-btn');
@@ -17,12 +25,11 @@ const menuBtn = document.querySelector('#mobile-menu-icon');
 const menuCross = document.querySelector('#mobile-cross');
 const mobileMenu = document.querySelector('.mobile-menu');
 const popup = document.querySelector('.popup');
-
-const signinPopup = new Popup(signinForm);
-const signupPopup = new Popup(signupForm);
-const successPopup = new Popup(success);
-
 const headerMenu = document.querySelector('.header__menu');
+
+const signinPopup = new Popup(DOM.signinForm);
+const signupPopup = new Popup(DOM.signupForm);
+const successPopup = new Popup(DOM.success);
 
 const signedMenu = `<a href="/" class="header__link header__link_active">Главная</a>
 <a href="./articles.html" class="header__link">Сохранённые статьи</a>
@@ -30,6 +37,23 @@ const signedMenu = `<a href="/" class="header__link header__link_active">Гла�
 
 const notSignedMenu = `<a href="" class="header__link header__link_active">Главная</a>
 <button class="header__button" id="auth-btn" >Авторизоваться</button>`;
+
+const JWT_TOKEN = localStorage.getItem('token');
+if (JWT_TOKEN) {
+  mainApi.loggedIn = true;
+  mainApi
+    .getUserData()
+    .then((res) => {
+      header.render({ isLoggedIn: true, userName: res.data.name });
+    })
+    .catch((err) => console.error(err));
+  mainApi
+    .getArticles()
+    .then((res) => {
+      newsCardList.savedCards = res.data;
+    })
+    .catch((err) => console.error(err));
+}
 
 // меню для мобилок
 
