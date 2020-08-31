@@ -1,5 +1,4 @@
 import '../css/index.css';
-
 import insertCurrentDate from './utils/copyright';
 
 // classes
@@ -12,24 +11,12 @@ import NewsApi from './api/NewsApi';
 import DOM from './constants/DOM';
 import Form from './components/Form';
 
-const authBtn = document.querySelector('#auth-btn');
-const authMobileBtn = document.querySelector('#auth-mobile-btn');
-const techContainer = document.querySelector('.tech');
-const signupButton = document.querySelector('#signup-btn');
-const signinButton = document.querySelector('#signin-btn');
-const signinForm = document.querySelector('#sign-in-popup');
-const signupForm = document.querySelector('#sign-up-popup');
-const success = document.querySelector('#success-popup');
-const signupLink = document.querySelector('#popup__signup-link');
-const menuBtn = document.querySelector('#mobile-menu-icon');
-const menuCross = document.querySelector('#mobile-cross');
-const mobileMenu = document.querySelector('.mobile-menu');
-const popup = document.querySelector('.popup');
-const headerMenu = document.querySelector('.header__menu');
-
-const signinPopup = new Popup(DOM.signinForm);
-const signupPopup = new Popup(DOM.signupForm);
-const successPopup = new Popup(DOM.success);
+const signinPopupInstance = new Popup(DOM.signinPopup);
+const signupPopupInstance = new Popup(DOM.signupPopup);
+const successPopupInstance = new Popup(DOM.successPopup);
+const mainApi = new MainApi();
+const signInForm = new Form(DOM.signInForm, DOM.signinButton);
+const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
 
 const signedMenu = `<a href="/" class="header__link header__link_active">Главная</a>
 <a href="./articles.html" class="header__link">Сохранённые статьи</a>
@@ -55,27 +42,42 @@ if (JWT_TOKEN) {
     .catch((err) => console.error(err));
 }
 
+DOM.signInForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+});
+
+DOM.signUpForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  mainApi.signup(DOM.signUpNameInput.value, DOM.signUpEmailInput.value, DOM.signUpPasswordInput.value).then((res) => {
+    if (res.status === 'error') {
+      signUpForm.setServerError(DOM.signUpServerError, res.message);
+    } else {
+      signupPopupInstance.close();
+      successPopupInstance.open();
+    }
+  });
+});
+
 // меню для мобилок
 
 function mobileMenuHandler() {
-  mobileMenu.classList.toggle('mobile-menu_opened');
+  DOM.mobileMenu.classList.toggle('mobile-menu_opened');
 }
-
 // меняет шапку хэдера
 
 function showMenu(signin) {
   if (signin) {
-    headerMenu.innerHTML = signedMenu;
+    DOM.headerMenu.innerHTML = signedMenu;
   } else {
-    headerMenu.innerHTML = notSignedMenu;
+    DOM.headerMenu.innerHTML = notSignedMenu;
   }
 }
 
-signinButton.addEventListener('click', (event) => {
-  event.preventDefault();
-  showMenu(true);
-  signinPopup.close();
-});
+// DOM.signinButton.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   showMenu(true);
+//   signinPopup.close();
+// });
 
 document.addEventListener('click', (event) => {
   if (event.target.id === 'exit') {
@@ -85,7 +87,7 @@ document.addEventListener('click', (event) => {
 
 // меняет "Ничего не найдено на лоадер"
 
-techContainer.addEventListener('click', (e) => {
+DOM.techContainer.addEventListener('click', (e) => {
   e.target.innerHTML = `<i class="circle-preloader"></i>
   <p class="tech__message">Идет поиск новостей...</p>`;
   setTimeout(() => {
@@ -96,34 +98,34 @@ techContainer.addEventListener('click', (e) => {
 });
 
 // открывают попап входа
-authBtn.addEventListener('click', () => {
-  signinPopup.open();
+DOM.authBtn.addEventListener('click', () => {
+  signinPopupInstance.open();
 });
-authMobileBtn.addEventListener('click', () => {
-  signinPopup.open();
+DOM.authMobileBtn.addEventListener('click', () => {
+  signinPopupInstance.open();
 });
 
 window.addEventListener('click', (event) => {
   if (event.target.classList.contains('popup__link_to-signin')) {
-    signinPopup.open();
-    signupPopup.close();
-    successPopup.close();
+    signinPopupInstance.open();
+    signupPopupInstance.close();
+    successPopupInstance.close();
   }
 });
 
 // открывает попап регистрации
 
-signupLink.addEventListener('click', () => {
-  signupPopup.open();
-  signinPopup.close();
+DOM.signupLink.addEventListener('click', () => {
+  signupPopupInstance.open();
+  signinPopupInstance.close();
 });
 
 // открывает попап успешной регистрации
-signupButton.addEventListener('click', (event) => {
-  event.preventDefault();
-  successPopup.open();
-  signupPopup.close();
-});
+// DOM.signupButton.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   successPopupInstance.open();
+//   signupPopupInstance.close();
+// });
 
 // закрывают попап
 window.addEventListener('click', (event) => {
@@ -133,13 +135,20 @@ window.addEventListener('click', (event) => {
   }
 });
 
-popup.addEventListener('click', (event) => {
+DOM.popup.addEventListener('click', (event) => {
   event.target.classList.remove('popup_is-opened');
 });
 
 // mobile menu
-menuBtn.addEventListener('click', mobileMenuHandler);
-menuCross.addEventListener('click', mobileMenuHandler);
+DOM.menuBtn.addEventListener('click', mobileMenuHandler);
+DOM.menuCross.addEventListener('click', mobileMenuHandler);
+
+// валидация форм
+signInForm.setInputListeners(DOM.signInEmailInput);
+signInForm.setInputListeners(DOM.signInPasswordInput);
+signUpForm.setInputListeners(DOM.signUpEmailInput);
+signUpForm.setInputListeners(DOM.signUpPasswordInput);
+signUpForm.setInputListeners(DOM.signUpNameInput);
 
 // copyrigth
 insertCurrentDate();

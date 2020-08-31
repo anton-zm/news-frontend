@@ -184,37 +184,36 @@
             </div>
         </section>
         <div class="popup" id="sign-in-popup">
-            <form class="popup__form" id="sign-in-form">
+            <form class="popup__form" id="sign-in-form" novalidate>
                 <img src="<%=require('../images/close.png').default%>" alt="Закрыть" class="popup__cross">
                 <h3 class="popup__title">Вход</h3>
                 <p class="popup__label">Email</p>
-                <input name="email" type="text" class="popup__input" placeholder="Введите почту" required>
-                <p class="popup__error" id="signin-email-error">Неправильный формат email</p>
+                <input name="email" type="email" class="popup__input" id="signin-input-email" placeholder="Введите почту" required>
+                <p class="popup__error" id="signin-email-error"></p>
                 <p  class="popup__label">Пароль</p>
-                <input name="password" type="password" class="popup__input" placeholder="Введите пароль" required>
-                <p class="popup__error" id="signin-password-error">Это обязательное поле</p>
-                <p class="popup__error popup__error_server" id="signin-server-error">Такой пользователь уже есть</p>
-                <button type="submit" class="popup__button" id="signin-btn">Войти</button>
+                <input name="password" type="password" class="popup__input" id="signin-input-password" minlength="8" maxlength="30" placeholder="Введите пароль" required>
+                <p class="popup__error" id="signin-password-error"></p>
+                <p class="popup__error popup__error_server" id="signin-server-error"></p>
+                <button type="submit" class="popup__button" id="signin-btn" disabled>Войти</button>
                 <p class="popup__call">или <span class="popup__link" id="popup__signup-link">Зарегистрироваться</span>
                 </p>
             </form>
         </div>
         <div class="popup" id="sign-up-popup">
-            <form class="popup__form" id="sign-up-form">
+            <form class="popup__form" id="sign-up-form" novalidate>
                 <img src="<%=require('../images/close.png').default%>" alt="Закрыть" class="popup__cross">
                 <h3 class="popup__title">Регистрация</h3>
                 <p  class="popup__label">Email</p>
-                <input name="email" type="text" class="popup__input" placeholder="Введите почту" required>
-                <p class="popup__error" id="signup-email-error">Неправильный формат email</p>
+                <input name="email" type="email" class="popup__input" id="signup-input-email"placeholder="Введите почту" required>
+                <p class="popup__error" id="signup-email-error"></p>
                 <p  class="popup__label">Пароль</p>
-                <input name="password" type="password" class="popup__input" placeholder="Введите пароль" required>
-                <p class="popup__error" id="signup-password-error">Это обязательное поле</p>
+                <input name="password" type="password" class="popup__input" id="signup-input-password" minlength="8" maxlength="30" placeholder="Введите пароль" required>
+                <p class="popup__error" id="signup-password-error"></p>
                 <p  class="popup__label">Имя</p>
-                <input name="name" type="text" class="popup__input" placeholder="Введите своё имя" required>
-                <p class="popup__error" id="name-error">Это обязательное поле</p>
-                <p class="popup__error popup__error_server" id="signup-server-error">Такой пользователь уже есть</p>
-                <button type="submit" class="popup__button popup__button_active"
-                    id="signup-btn">Зарегистрироваться</button>
+                <input name="name" type="text" class="popup__input" id="signup-input-name" minlength="2" maxlength="30" placeholder="Введите своё имя" required>
+                <p class="popup__error" id="signup-name-error"></p>
+                <p class="popup__error popup__error_server" id="signup-server-error"></p>
+                <button type="submit" class="popup__button" id="signup-btn" disabled>Зарегистрироваться</button>
                 <p class="popup__call">или <span class="popup__link popup__link_to-signin"
                         id="popup__signin-link">Войти</span>
                 </p>

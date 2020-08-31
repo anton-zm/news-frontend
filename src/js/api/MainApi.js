@@ -3,23 +3,27 @@ export default class MainApi {
     this.loggedIn = false;
     this.apiURL = 'https://api.diploma.ml';
   }
+
   signup(name, email, password) {
     return fetch(`${this.apiURL}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify({ name, email, password }),
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.ok) {
+        if (res.statusCode >= 400) {
           return Promise.reject(res.message);
         }
+        console.log(res);
         return res;
       })
-      .catch((err) => Promise.reject(err));
+      .catch((err) => {
+        console.log(err);
+        return { status: 'error', message: err };
+      });
   }
 
   signin(email, password) {
@@ -28,12 +32,11 @@ export default class MainApi {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify({ email, password }),
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.ok) {
+        if (!res.ok) {
           return Promise.reject(res.message);
         }
         return res;
@@ -42,13 +45,12 @@ export default class MainApi {
         localStorage.setItem('token', data.token);
         return data;
       })
-      .catch((err) => Promise.reject(err));
+      .catch((err) => console.log(err));
   }
 
   getUserData() {
     return fetch(`${this.apiURL}/users/me`, {
       method: 'GET',
-      credentials: 'include',
     })
       .then((res) => {
         if (res.ok) {
@@ -56,13 +58,12 @@ export default class MainApi {
         }
         return Promise.reject(res.message);
       })
-      .catch((err) => Promise.reject(err));
+      .catch((err) => console.log(err));
   }
 
   getArticles() {
     return fetch(`${this.apiURL}/articles`, {
       method: 'GET',
-      credentials: 'include',
     })
       .then((res) => {
         if (res.ok) {
@@ -70,13 +71,12 @@ export default class MainApi {
         }
         return Promise.reject(res.message);
       })
-      .catch((err) => Promise.reject(err));
+      .catch((err) => console.log(err));
   }
 
   createArticle(keyword, title, text, date, source, link, image) {
     return fetch(`${this.apiURL}/articles`, {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -88,13 +88,12 @@ export default class MainApi {
         }
         return Promise.reject(res.message);
       })
-      .catch((err) => Promise.reject(err));
+      .catch((err) => console.log(err));
   }
 
   removeArticle(id) {
     return fetch(`${this.apiURL}/articles/${id}`, {
       method: 'DELETE',
-      credentials: 'include',
     })
       .then((res) => {
         if (res.ok) {
@@ -102,6 +101,6 @@ export default class MainApi {
         }
         return Promise.reject(res.message);
       })
-      .catch((err) => Promise.reject(err));
+      .catch((err) => console.log(err));
   }
 }
