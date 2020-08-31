@@ -17,7 +17,6 @@ export default class MainApi {
         if (res.statusCode >= 400) {
           return Promise.reject(res.message);
         }
-        console.log(res);
         return res;
       })
       .catch((err) => {
@@ -36,7 +35,7 @@ export default class MainApi {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (!res.ok) {
+        if (res.statusCode >= 400) {
           return Promise.reject(res.message);
         }
         return res;
@@ -45,7 +44,10 @@ export default class MainApi {
         localStorage.setItem('token', data.token);
         return data;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        return { status: 'error', message: err };
+      });
   }
 
   getUserData() {

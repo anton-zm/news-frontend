@@ -10,6 +10,7 @@ import MainApi from './api/MainApi';
 import NewsApi from './api/NewsApi';
 import DOM from './constants/DOM';
 import Form from './components/Form';
+import Header from './components/Header';
 
 const signinPopupInstance = new Popup(DOM.signinPopup);
 const signupPopupInstance = new Popup(DOM.signupPopup);
@@ -17,44 +18,43 @@ const successPopupInstance = new Popup(DOM.successPopup);
 const mainApi = new MainApi();
 const signInForm = new Form(DOM.signInForm, DOM.signinButton);
 const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
-
-const signedMenu = `<a href="/" class="header__link header__link_active">Главная</a>
-<a href="./articles.html" class="header__link">Сохранённые статьи</a>
-<button class="header__button header__button-icon" id="exit">Антон</button>`;
-
-const notSignedMenu = `<a href="" class="header__link header__link_active">Главная</a>
-<button class="header__button" id="auth-btn" >Авторизоваться</button>`;
+const header = new Header(DOM.headerMenu, DOM.mobileMenu);
 
 const JWT_TOKEN = localStorage.getItem('token');
+console.log(JWT_TOKEN);
 if (JWT_TOKEN) {
-  mainApi.loggedIn = true;
+  // mainApi.loggedIn = true;
   mainApi
     .getUserData()
     .then((res) => {
-      header.render({ isLoggedIn: true, userName: res.data.name });
+      header.render({ isLoggedIn: true, name: res.data.name });
     })
     .catch((err) => console.error(err));
-  mainApi
-    .getArticles()
-    .then((res) => {
-      newsCardList.savedCards = res.data;
-    })
-    .catch((err) => console.error(err));
+  // mainApi
+  //   .getArticles()
+  //   .then((res) => {
+  //     newsCardList.savedCards = res.data;
+  //   })
+  //   .catch((err) => console.error(err));
 }
 
 DOM.signInForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  mainApi.signin(DOM.signInEmailInput, DOM.signInPasswordInput);
 });
 
 DOM.signUpForm.addEventListener('submit', (event) => {
   event.preventDefault();
   mainApi.signup(DOM.signUpNameInput.value, DOM.signUpEmailInput.value, DOM.signUpPasswordInput.value).then((res) => {
+    console.log(res.status);
     if (res.status === 'error') {
       signUpForm.setServerError(DOM.signUpServerError, res.message);
-    } else {
-      signupPopupInstance.close();
-      successPopupInstance.open();
     }
+    // else {
+    //   signupPopupInstance.clearContent();
+    //   signupPopupInstance.close();
+    //   successPopupInstance.open();
+    // }
   });
 });
 
@@ -65,13 +65,13 @@ function mobileMenuHandler() {
 }
 // меняет шапку хэдера
 
-function showMenu(signin) {
-  if (signin) {
-    DOM.headerMenu.innerHTML = signedMenu;
-  } else {
-    DOM.headerMenu.innerHTML = notSignedMenu;
-  }
-}
+// function showMenu(signin) {
+//   if (signin) {
+//     DOM.headerMenu.innerHTML = signedMenu;
+//   } else {
+//     DOM.headerMenu.innerHTML = notSignedMenu;
+//   }
+// }
 
 // DOM.signinButton.addEventListener('click', (event) => {
 //   event.preventDefault();
@@ -120,13 +120,6 @@ DOM.signupLink.addEventListener('click', () => {
   signinPopupInstance.close();
 });
 
-// открывает попап успешной регистрации
-// DOM.signupButton.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   successPopupInstance.open();
-//   signupPopupInstance.close();
-// });
-
 // закрывают попап
 window.addEventListener('click', (event) => {
   if (event.target.classList.contains('popup__cross')) {
@@ -144,11 +137,28 @@ DOM.menuBtn.addEventListener('click', mobileMenuHandler);
 DOM.menuCross.addEventListener('click', mobileMenuHandler);
 
 // валидация форм
-signInForm.setInputListeners(DOM.signInEmailInput);
-signInForm.setInputListeners(DOM.signInPasswordInput);
-signUpForm.setInputListeners(DOM.signUpEmailInput);
-signUpForm.setInputListeners(DOM.signUpPasswordInput);
-signUpForm.setInputListeners(DOM.signUpNameInput);
+// signInForm.setInputListeners(DOM.signInEmailInput);
+// signInForm.setInputListeners(DOM.signInPasswordInput);
+
+// signUpForm.setInputListeners(DOM.signUpEmailInput);
+// signUpForm.setInputListeners(DOM.signUpPasswordInput);
+// signUpForm.setInputListeners(DOM.signUpNameInput);
+
+// DOM.signInEmailInput.addEventListener('input', (event) => {
+//   signInForm.setInputListeners(event.target);
+// });
+// DOM.signInPasswordInput.addEventListener('input', (event) => {
+//   signInForm.setInputListeners(event.target);
+// });
+// DOM.signUpEmailInput.addEventListener('input', (event) => {
+//   signUpForm.setInputListeners(event.target);
+// });
+// DOM.signUpPasswordInput.addEventListener('input', (event) => {
+//   signUpForm.setInputListeners(event.target);
+// });
+// DOM.signUpNameInput.addEventListener('input', (event) => {
+//   signUpForm.setInputListeners(event.target);
+// });
 
 // copyrigth
 insertCurrentDate();

@@ -16,11 +16,12 @@ export default class Form {
     // this.setEvent = this.setEvent.bind(this);
     // this.setInputListeners = this.setInputListeners.bind(this);
     // this._validateForm = this._validateForm.bind(this);
-    form.addEventListener('input', this._validateInputElement.bind(this));
+    this._validateInputElement = this._validateInputElement.bind(this);
+    this.form.addEventListener('input', this._validateInputElement);
   }
 
-  setInputListeners(input) {
-    input.addEventListener('input', this._validateInputElement);
+  setInputListeners(el) {
+    this._validateInputElement(el);
   }
 
   setServerError(container, message) {
@@ -29,7 +30,6 @@ export default class Form {
 
   _validateInputElement(event) {
     const el = event.target;
-    this._validateForm();
     if (el.value === '') {
       el.nextElementSibling.textContent = Errors.REQUIRED;
     } else if (el.name === 'email' && !validator.isEmail(el.value)) {
@@ -57,7 +57,9 @@ export default class Form {
     }
   }
 
-  _clear() {}
+  _clear() {
+    this.form.reset();
+  }
 
   _getInfo() {}
 
