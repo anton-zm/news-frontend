@@ -10,5 +10,7 @@ export default class Popup {
   }
   setContent() {}
 
-  clearContent() {}
+  clearContent(form) {
+    form.reset();
+  }
 }

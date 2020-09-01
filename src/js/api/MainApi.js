@@ -14,7 +14,7 @@ export default class MainApi {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.statusCode >= 400) {
+        if (!res.statusCode === 200) {
           return Promise.reject(res.message);
         }
         return res;
@@ -50,9 +50,13 @@ export default class MainApi {
       });
   }
 
-  getUserData() {
+  getUserData(token) {
     return fetch(`${this.apiURL}/users/me`, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((res) => {
         if (res.ok) {

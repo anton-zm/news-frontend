@@ -25,9 +25,9 @@ console.log(JWT_TOKEN);
 if (JWT_TOKEN) {
   // mainApi.loggedIn = true;
   mainApi
-    .getUserData()
+    .getUserData(JWT_TOKEN)
     .then((res) => {
-      header.render({ isLoggedIn: true, name: res.data.name });
+      header.render({ isLoggedIn: true, name: res.name });
     })
     .catch((err) => console.error(err));
   // mainApi
@@ -40,21 +40,27 @@ if (JWT_TOKEN) {
 
 DOM.signInForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  mainApi.signin(DOM.signInEmailInput, DOM.signInPasswordInput);
+  mainApi.signin(DOM.signInEmailInput.value, DOM.signInPasswordInput.value).then((res) => {
+    if (res.status === 'error') {
+      signInForm.setServerError(DOM.signUpServerError, res.message);
+    } else {
+      signinPopupInstance.clearContent(event.target);
+      signinPopupInstance.close();
+    }
+  });
 });
 
 DOM.signUpForm.addEventListener('submit', (event) => {
   event.preventDefault();
   mainApi.signup(DOM.signUpNameInput.value, DOM.signUpEmailInput.value, DOM.signUpPasswordInput.value).then((res) => {
-    console.log(res.status);
+    // console.log(res);
     if (res.status === 'error') {
       signUpForm.setServerError(DOM.signUpServerError, res.message);
+    } else {
+      signupPopupInstance.clearContent(event.target);
+      signupPopupInstance.close();
+      successPopupInstance.open();
     }
-    // else {
-    //   signupPopupInstance.clearContent();
-    //   signupPopupInstance.close();
-    //   successPopupInstance.open();
-    // }
   });
 });
 
