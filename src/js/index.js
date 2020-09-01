@@ -1,5 +1,7 @@
 import '../css/index.css';
 import insertCurrentDate from './utils/copyright';
+import dateFormatter from './utils/dateFormatter';
+import preloader from './utils/preloader';
 
 // classes
 
@@ -16,6 +18,7 @@ const signinPopupInstance = new Popup(DOM.signinPopup);
 const signupPopupInstance = new Popup(DOM.signupPopup);
 const successPopupInstance = new Popup(DOM.successPopup);
 const mainApi = new MainApi();
+const newsApi = new NewsApi();
 const signInForm = new Form(DOM.signInForm, DOM.signinButton);
 const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
 const header = new Header(DOM.headerMenu, DOM.mobileMenu);
@@ -38,52 +41,11 @@ if (JWT_TOKEN) {
   //   .catch((err) => console.error(err));
 }
 
-DOM.signInForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  mainApi.signin(DOM.signInEmailInput.value, DOM.signInPasswordInput.value).then((res) => {
-    if (res.status === 'error') {
-      signInForm.setServerError(DOM.signUpServerError, res.message);
-    } else {
-      signinPopupInstance.clearContent(event.target);
-      signinPopupInstance.close();
-    }
-  });
-});
-
-DOM.signUpForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  mainApi.signup(DOM.signUpNameInput.value, DOM.signUpEmailInput.value, DOM.signUpPasswordInput.value).then((res) => {
-    // console.log(res);
-    if (res.status === 'error') {
-      signUpForm.setServerError(DOM.signUpServerError, res.message);
-    } else {
-      signupPopupInstance.clearContent(event.target);
-      signupPopupInstance.close();
-      successPopupInstance.open();
-    }
-  });
-});
-
 // меню для мобилок
 
 function mobileMenuHandler() {
   DOM.mobileMenu.classList.toggle('mobile-menu_opened');
 }
-// меняет шапку хэдера
-
-// function showMenu(signin) {
-//   if (signin) {
-//     DOM.headerMenu.innerHTML = signedMenu;
-//   } else {
-//     DOM.headerMenu.innerHTML = notSignedMenu;
-//   }
-// }
-
-// DOM.signinButton.addEventListener('click', (event) => {
-//   event.preventDefault();
-//   showMenu(true);
-//   signinPopup.close();
-// });
 
 document.addEventListener('click', (event) => {
   if (event.target.id === 'exit') {
@@ -93,15 +55,15 @@ document.addEventListener('click', (event) => {
 
 // меняет "Ничего не найдено на лоадер"
 
-DOM.techContainer.addEventListener('click', (e) => {
-  e.target.innerHTML = `<i class="circle-preloader"></i>
-  <p class="tech__message">Идет поиск новостей...</p>`;
-  setTimeout(() => {
-    e.target.innerHTML = `<img src="../images/not-found_v1.png" alt="Ничего не найдено">
-        <h3 class="tech__title">Ничего не найдено</h3>
-        <p class="tech__message">К сожалению по вашему запросу ничего не найдено.</p>`;
-  }, 3000);
-});
+// DOM.techContainer.addEventListener('click', (e) => {
+//   e.target.innerHTML = `<i class="circle-preloader"></i>
+//   <p class="tech__message">Идет поиск новостей...</p>`;
+//   setTimeout(() => {
+//     e.target.innerHTML = `<img src="../images/not-found_v1.png" alt="Ничего не найдено">
+//         <h3 class="tech__title">Ничего не найдено</h3>
+//         <p class="tech__message">К сожалению по вашему запросу ничего не найдено.</p>`;
+//   }, 3000);
+// });
 
 // открывают попап входа
 DOM.authBtn.addEventListener('click', () => {
@@ -138,33 +100,75 @@ DOM.popup.addEventListener('click', (event) => {
   event.target.classList.remove('popup_is-opened');
 });
 
+// form submits
+
+DOM.signInForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  mainApi
+    .signin(DOM.signInEmailInput.value, DOM.signInPasswordInput.value)
+    .then((res) => {
+      if (res.status === 'error') {
+        signInForm.setServerError(DOM.signUpServerError, res.message);
+      } else {
+        signinPopupInstance.clearContent(event.target);
+        signinPopupInstance.close();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+DOM.signUpForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  mainApi
+    .signup(DOM.signUpNameInput.value, DOM.signUpEmailInput.value, DOM.signUpPasswordInput.value)
+    .then((res) => {
+      if (res.status === 'error') {
+        signUpForm.setServerError(DOM.signUpServerError, res.message);
+      } else {
+        signupPopupInstance.clearContent(event.target);
+        signupPopupInstance.close();
+        successPopupInstance.open();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+DOM.searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const keyword = DOM.searchInput.value;
+  if (!keyword) {
+    DOM.searchInput.classList.add('search__input_missing');
+    setTimeout(() => {
+      DOM.searchInput.classList.remove('search__input_missing');
+    }, 200);
+    return;
+  }
+  preloader(DOM.techContainer, 'loading');
+  const today = new Date();
+  const articlesAgeFrom = dateFormatter.setArticleAge(today, 7);
+  const articlesAgeTo = dateFormatter.requestDate(today);
+  newsApi
+    .getNews(keyword, articlesAgeFrom, articlesAgeTo)
+    .then((res) => {
+      console.log(res);
+      preloader(DOM.techContainer, 'stop');
+      if (res.status === 'nothing') {
+        preloader(DOM.techContainer, 'nothing');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 // mobile menu
 DOM.menuBtn.addEventListener('click', mobileMenuHandler);
 DOM.menuCross.addEventListener('click', mobileMenuHandler);
-
-// валидация форм
-// signInForm.setInputListeners(DOM.signInEmailInput);
-// signInForm.setInputListeners(DOM.signInPasswordInput);
-
-// signUpForm.setInputListeners(DOM.signUpEmailInput);
-// signUpForm.setInputListeners(DOM.signUpPasswordInput);
-// signUpForm.setInputListeners(DOM.signUpNameInput);
-
-// DOM.signInEmailInput.addEventListener('input', (event) => {
-//   signInForm.setInputListeners(event.target);
-// });
-// DOM.signInPasswordInput.addEventListener('input', (event) => {
-//   signInForm.setInputListeners(event.target);
-// });
-// DOM.signUpEmailInput.addEventListener('input', (event) => {
-//   signUpForm.setInputListeners(event.target);
-// });
-// DOM.signUpPasswordInput.addEventListener('input', (event) => {
-//   signUpForm.setInputListeners(event.target);
-// });
-// DOM.signUpNameInput.addEventListener('input', (event) => {
-//   signUpForm.setInputListeners(event.target);
-// });
 
 // copyrigth
 insertCurrentDate();

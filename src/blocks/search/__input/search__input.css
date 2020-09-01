@@ -22,6 +22,12 @@
   color: #b6bcbf;
 }
 
+.search__input_missing {
+}
+.search__input_missing::placeholder {
+  color: red;
+}
+
 @media screen and (max-width: 768px) {
   .search__input {
     width: 64.3%;

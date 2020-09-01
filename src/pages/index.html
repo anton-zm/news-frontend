@@ -48,17 +48,17 @@
             <h1 class="header__title">Что в мире творится?</h1>
             <p class="header__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
             </p>
-            <form class="search">
-                <input type="text" class="search__input" placeholder="Введите тему новости" required>
-                <button class="search__button" type="submit">Искать</button>
+            <form class="search" novalidate>
+                <input type="text" class="search__input" id="search-input" placeholder="Введите тему новости">
+                <button class="search__button" type="submit" id="search-btn">Искать</button>
             </form>
           </div>
         </div>
     </header>
     <section class="tech">
-        <img src="<%=require('../images/not-found_v1.png').default%>" alt="Ничего не найдено">
+        <!-- <img src="<%=require('../images/not-found_v1.png').default%>" alt="Ничего не найдено">
         <h3 class="tech__title">Ничего не найдено</h3>
-        <p class="tech__message">К сожалению по вашему запросу ничего не найдено.</p>
+        <p class="tech__message">К сожалению по вашему запросу ничего не найдено.</p> -->
     </section>
     <main class="page">
         <section class="result">

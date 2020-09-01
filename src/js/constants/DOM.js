@@ -4,6 +4,7 @@ export default {
   techContainer: document.querySelector('.tech'), // место, где появляется прелоудер и "Ничего не найдено"
   signupButton: document.querySelector('#signup-btn'), // кнопка "Зарегистрироваться" в форме регистрации
   signinButton: document.querySelector('#signin-btn'), // кнопка "Войти" в форме входа
+  searchButton: document.querySelector('#search-btn'), // кнопка "Искать"
   signinPopup: document.querySelector('#sign-in-popup'), // попап входа
   signupPopup: document.querySelector('#sign-up-popup'), // попап регистрации
   successPopup: document.querySelector('#success-popup'), // попап успешной регистрации
@@ -23,6 +24,8 @@ export default {
   signInEmailInput: document.querySelector('#signin-input-email'), // поле ввода EMAIL в форме входа
   signInPasswordInput: document.querySelector('#signin-input-password'), // поле ввода PASSWORD в форме входа
 
+  searchInput: document.querySelector('#search-input'), // поле ввода ключевого слова
+
   // поля ошибок
 
   signInEmailError: document.querySelector('#signin-email-error'), // ошибка поля почты
@@ -38,4 +41,5 @@ export default {
 
   signUpForm: document.querySelector('#sign-up-form'), // форма регистрации
   signInForm: document.querySelector('#sign-in-form'), // форма входа
+  searchForm: document.querySelector('.search'), // форма поиска статей
 };

@@ -6,16 +6,7 @@ export default class Form {
   constructor(form, button) {
     this.form = form;
     this.button = button;
-    // this._api = api;
-    // this._header = header;
-    // this._popup = popup;
-    // this._successPopup = successPopup;
-    // this._cardList = cardList;
-    // form.addEventListener('input', this._validateInputElement.bind(this));
-    // form.addEventListener('submit', this._submitForm.bind(this));
-    // this.setEvent = this.setEvent.bind(this);
-    // this.setInputListeners = this.setInputListeners.bind(this);
-    // this._validateForm = this._validateForm.bind(this);
+
     this._validateInputElement = this._validateInputElement.bind(this);
     this.form.addEventListener('input', this._validateInputElement);
   }
