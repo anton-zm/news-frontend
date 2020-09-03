@@ -5,6 +5,7 @@ export default {
   signupButton: document.querySelector('#signup-btn'), // кнопка "Зарегистрироваться" в форме регистрации
   signinButton: document.querySelector('#signin-btn'), // кнопка "Войти" в форме входа
   searchButton: document.querySelector('#search-btn'), // кнопка "Искать"
+  showMoreArticles: document.querySelector('.result__button'), // кнопка "Показать ещё"
   signinPopup: document.querySelector('#sign-in-popup'), // попап входа
   signupPopup: document.querySelector('#sign-up-popup'), // попап регистрации
   successPopup: document.querySelector('#success-popup'), // попап успешной регистрации
@@ -14,6 +15,9 @@ export default {
   mobileMenu: document.querySelector('.mobile-menu'), // меню для мобилок
   popup: document.querySelector('.popup'), // любой попап
   headerMenu: document.querySelector('.header__menu'), // меню в хэдере
+  resultSection: document.querySelector('.result'), // секция result
+  resultContent: document.querySelector('.result__content'), // блок с заголовком "Результаты поиска"
+  resultContainer: document.querySelector('.result__container'), // сюда складываем карточки статей
 
   // поля ввода
 

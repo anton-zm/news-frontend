@@ -1,7 +1,6 @@
 .card__img {
   min-height: 272px;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
+  width: 100%;
 }
 
 #c1,
@@ -25,18 +24,16 @@
 @media screen and (max-width: 768px) {
   .card__img {
     min-height: 150px;
-    background-size: 100% 100%;
   }
 }
 
 @media screen and (max-width: 620px) {
   .card__img {
     min-height: 150px;
-    background-size: 100% 100%;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 320px) and (max-width: 619px) {
   .card__img {
     min-height: 196px;
   }

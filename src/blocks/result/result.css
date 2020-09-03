@@ -11,6 +11,10 @@
   padding: 62px 0;
 }
 
+.result_hidden {
+  visibility: hidden;
+}
+
 @media screen and (max-width: 768px) {
   .result {
     padding: 40px 0;

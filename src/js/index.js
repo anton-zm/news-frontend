@@ -1,7 +1,6 @@
 import '../css/index.css';
 import insertCurrentDate from './utils/copyright';
 import dateFormatter from './utils/dateFormatter';
-import preloader from './utils/preloader';
 
 // classes
 
@@ -22,11 +21,13 @@ const newsApi = new NewsApi();
 const signInForm = new Form(DOM.signInForm, DOM.signinButton);
 const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
 const header = new Header(DOM.headerMenu, DOM.mobileMenu);
+const cardList = new NewsCardList(DOM.resultSection, DOM.resultContainer, DOM.techContainer, DOM.resultContent);
+const cardsArray = [];
+let cardsInRow = 3;
 
 const JWT_TOKEN = localStorage.getItem('token');
 console.log(JWT_TOKEN);
 if (JWT_TOKEN) {
-  // mainApi.loggedIn = true;
   mainApi
     .getUserData(JWT_TOKEN)
     .then((res) => {
@@ -53,17 +54,16 @@ document.addEventListener('click', (event) => {
   }
 });
 
-// меняет "Ничего не найдено на лоадер"
+function renderCards(array, iter) {
+  for (let i = 0; i < iter; i++) {
+    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage);
+    cardList.addCard(card.createCard());
+  }
+}
 
-// DOM.techContainer.addEventListener('click', (e) => {
-//   e.target.innerHTML = `<i class="circle-preloader"></i>
-//   <p class="tech__message">Идет поиск новостей...</p>`;
-//   setTimeout(() => {
-//     e.target.innerHTML = `<img src="../images/not-found_v1.png" alt="Ничего не найдено">
-//         <h3 class="tech__title">Ничего не найдено</h3>
-//         <p class="tech__message">К сожалению по вашему запросу ничего не найдено.</p>`;
-//   }, 3000);
-// });
+// function clearResult() {
+//   DOM.resultContainer.innerHTML = '';
+// }
 
 // открывают попап входа
 DOM.authBtn.addEventListener('click', () => {
@@ -139,7 +139,6 @@ DOM.signUpForm.addEventListener('submit', (event) => {
 
 DOM.searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
-
   const keyword = DOM.searchInput.value;
   if (!keyword) {
     DOM.searchInput.classList.add('search__input_missing');
@@ -148,23 +147,44 @@ DOM.searchForm.addEventListener('submit', (event) => {
     }, 200);
     return;
   }
-  preloader(DOM.techContainer, 'loading');
+
+  cardList.renderLoader('loading');
   const today = new Date();
   const articlesAgeFrom = dateFormatter.setArticleAge(today, 7);
   const articlesAgeTo = dateFormatter.requestDate(today);
+  cardsArray.forEach((e) => {
+    cardsArray.pop(e);
+  });
   newsApi
     .getNews(keyword, articlesAgeFrom, articlesAgeTo)
     .then((res) => {
-      console.log(res);
-      preloader(DOM.techContainer, 'stop');
+      console.log(res.articles); // удалить потом
+      cardList.renderLoader('stop');
       if (res.status === 'nothing') {
-        preloader(DOM.techContainer, 'nothing');
+        cardList.renderLoader('nothing');
       }
+
+      res.articles.forEach((e) => {
+        cardsArray.push(e);
+      });
+      cardList.renderResults();
+      renderCards(res.articles, cardsInRow);
+      cardList.showMore(DOM.resultContainer, renderCards, cardsInRow, res.articles);
+      // DOM.showMoreArticles.addEventListener('click', () => {
+      //   clearResult();
+      //   renderCards(res.articles, cardsInRow + 3);
+      // });
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
+// renderCards(cardsArray, cardsInRow);
+// DOM.showMoreArticles.addEventListener('click', () => {
+//   clearResult();
+//   renderCards(cardsArray, cardsInRow + 3);
+// });
 
 // mobile menu
 DOM.menuBtn.addEventListener('click', mobileMenuHandler);
