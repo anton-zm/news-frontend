@@ -2,7 +2,7 @@ import dateFormatter from '../utils/dateFormatter';
 import { JWT_TOKEN } from '../constants/token';
 
 export default class NewsCard {
-  constructor(title, description, date, source, url, image, api) {
+  constructor(title, description, date, source, url, image, api, keyword) {
     this.title = title;
     this.description = description;
     this.date = date;
@@ -10,6 +10,7 @@ export default class NewsCard {
     this.url = url;
     this.image = image;
     this.api = api;
+    this.keyword = keyword;
     this.markArticleIcon = this.markArticleIcon.bind(this);
     this.mouseoutEvent = this.mouseoutEvent.bind(this);
     this.card = document.createElement('div');
@@ -62,6 +63,7 @@ export default class NewsCard {
     if (JWT_TOKEN) {
       if (event.target.classList.contains('card__button-img')) {
         event.target.setAttribute('src', '../images/savemarked.svg');
+        this.api.createArticle(this.keyword, this.title, this.description, this.date, this.source, this.url, this.image);
         this.card.removeEventListener('mouseout', this.mouseoutEvent);
         this.card.removeEventListener('mouseover', this.mouseoverEvent);
       }

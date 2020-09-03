@@ -23,7 +23,6 @@ const signInForm = new Form(DOM.signInForm, DOM.signinButton);
 const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
 const header = new Header(DOM.headerMenu, DOM.mobileMenu);
 const cardList = new NewsCardList(DOM.resultSection, DOM.resultContainer, DOM.techContainer, DOM.resultContent);
-// const card = new NewsCard();
 const cardsArray = [];
 let cardsInRow = 3;
 
@@ -55,22 +54,16 @@ document.addEventListener('click', (event) => {
   }
 });
 
-function renderCards(array, iter) {
+function renderCards(array, iter, keyword) {
   for (let i = 0; i < iter; i++) {
-    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi);
+    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi, keyword);
     cardList.addCard(card.createCard());
   }
 }
 
-// function renderCards(array, iter) {
-//   for (let i = 0; i < iter; i++) {
-//     cardList.addCard(card.createCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage));
-//   }
-// }
-
-// function clearResult() {
-//   DOM.resultContainer.innerHTML = '';
-// }
+function clearResults() {
+  DOM.resultContainer.innerHTML = '';
+}
 
 // открывают попап входа
 DOM.authBtn.addEventListener('click', () => {
@@ -162,6 +155,7 @@ DOM.searchForm.addEventListener('submit', (event) => {
   cardsArray.forEach((e) => {
     cardsArray.pop(e);
   });
+  clearResults();
   newsApi
     .getNews(keyword, articlesAgeFrom, articlesAgeTo)
     .then((res) => {
@@ -175,7 +169,7 @@ DOM.searchForm.addEventListener('submit', (event) => {
         cardsArray.push(e);
       });
       cardList.renderResults();
-      renderCards(res.articles, cardsInRow);
+      renderCards(res.articles, cardsInRow, keyword);
       cardList.showMore(DOM.resultContainer, renderCards, cardsInRow, res.articles);
     })
     .then()
@@ -183,12 +177,6 @@ DOM.searchForm.addEventListener('submit', (event) => {
       console.log(err);
     });
 });
-
-// renderCards(cardsArray, cardsInRow);
-// DOM.showMoreArticles.addEventListener('click', () => {
-//   clearResult();
-//   renderCards(cardsArray, cardsInRow + 3);
-// });
 
 // mobile menu
 DOM.menuBtn.addEventListener('click', mobileMenuHandler);

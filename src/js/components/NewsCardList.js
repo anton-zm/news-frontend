@@ -1,5 +1,3 @@
-import dateFormatter from '../utils/dateFormatter';
-
 export default class NewsCardList {
   constructor(section, container, techContainer, titleContainer) {
     this.section = section;
@@ -11,8 +9,6 @@ export default class NewsCardList {
 
   renderResults() {
     this.section.classList.remove('result_hidden');
-    this.titleContainer.insertAdjacentHTML('afterbegin', `<h2 class="content-title result__title">Результаты поиска</h2>`);
-    this.titleContainer.insertAdjacentHTML('beforeend', `<button class="result__button">Показать ещё</button>`);
   }
 
   renderLoader(result) {
@@ -41,7 +37,6 @@ export default class NewsCardList {
   }
 
   addCard(card) {
-    // this.container.insertAdjacentHTML('beforeend', card);
     this.container.appendChild(card);
   }
 }

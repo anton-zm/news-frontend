@@ -1,3 +1,5 @@
+import { JWT_TOKEN } from '../constants/token';
+
 export default class MainApi {
   constructor() {
     this.loggedIn = false;
@@ -85,11 +87,13 @@ export default class MainApi {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JWT_TOKEN}`,
       },
       body: JSON.stringify({ keyword, title, text, date, source, link, image }),
     })
       .then((res) => {
         if (res.ok) {
+          console.log(res);
           return res.json();
         }
         return Promise.reject(res.message);
