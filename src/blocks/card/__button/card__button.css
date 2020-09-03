@@ -25,6 +25,10 @@
   text-align: center;
 }
 
+.card__button_hidden {
+  visibility: hidden;
+}
+
 @media screen and (max-width: 768px) {
   .card__button_keyword {
     top: 8px;

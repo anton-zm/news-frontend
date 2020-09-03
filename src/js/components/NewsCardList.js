@@ -41,6 +41,7 @@ export default class NewsCardList {
   }
 
   addCard(card) {
-    this.container.insertAdjacentHTML('beforeend', card);
+    // this.container.insertAdjacentHTML('beforeend', card);
+    this.container.appendChild(card);
   }
 }

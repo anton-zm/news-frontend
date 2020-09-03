@@ -1,6 +1,7 @@
 import '../css/index.css';
 import insertCurrentDate from './utils/copyright';
 import dateFormatter from './utils/dateFormatter';
+import { JWT_TOKEN } from './constants/token';
 
 // classes
 
@@ -22,11 +23,11 @@ const signInForm = new Form(DOM.signInForm, DOM.signinButton);
 const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
 const header = new Header(DOM.headerMenu, DOM.mobileMenu);
 const cardList = new NewsCardList(DOM.resultSection, DOM.resultContainer, DOM.techContainer, DOM.resultContent);
+// const card = new NewsCard();
 const cardsArray = [];
 let cardsInRow = 3;
 
-const JWT_TOKEN = localStorage.getItem('token');
-console.log(JWT_TOKEN);
+console.log(JWT_TOKEN); // убрать потом
 if (JWT_TOKEN) {
   mainApi
     .getUserData(JWT_TOKEN)
@@ -56,10 +57,16 @@ document.addEventListener('click', (event) => {
 
 function renderCards(array, iter) {
   for (let i = 0; i < iter; i++) {
-    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage);
+    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi);
     cardList.addCard(card.createCard());
   }
 }
+
+// function renderCards(array, iter) {
+//   for (let i = 0; i < iter; i++) {
+//     cardList.addCard(card.createCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage));
+//   }
+// }
 
 // function clearResult() {
 //   DOM.resultContainer.innerHTML = '';
@@ -170,11 +177,8 @@ DOM.searchForm.addEventListener('submit', (event) => {
       cardList.renderResults();
       renderCards(res.articles, cardsInRow);
       cardList.showMore(DOM.resultContainer, renderCards, cardsInRow, res.articles);
-      // DOM.showMoreArticles.addEventListener('click', () => {
-      //   clearResult();
-      //   renderCards(res.articles, cardsInRow + 3);
-      // });
     })
+    .then()
     .catch((err) => {
       console.log(err);
     });

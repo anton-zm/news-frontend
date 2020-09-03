@@ -18,6 +18,7 @@ export default {
   resultSection: document.querySelector('.result'), // секция result
   resultContent: document.querySelector('.result__content'), // блок с заголовком "Результаты поиска"
   resultContainer: document.querySelector('.result__container'), // сюда складываем карточки статей
+  cardIconContainer: document.querySelectorAll('.card__save-container'), // контейнер иконок в карточке статьи
 
   // поля ввода
 
