@@ -12,9 +12,9 @@ export default class NewsCard {
     this.api = api;
     this.keyword = keyword;
     this.id = id;
-    this.markArticleIcon = this.markArticleIcon.bind(this);
-    this.mouseoutEvent = this.mouseoutEvent.bind(this);
-    this.mouseoverEvent = this.mouseoverEvent.bind(this);
+    this._markArticleIcon = this._markArticleIcon.bind(this);
+    this._mouseoutEvent = this._mouseoutEvent.bind(this);
+    this._mouseoverEvent = this._mouseoverEvent.bind(this);
     this.card = document.createElement('div');
     this.deleteCard = this.deleteCard.bind(this);
   }
@@ -33,15 +33,15 @@ export default class NewsCard {
     <p class="card__subtitle">${this.description}</p>
     <a href=${this.url} class="card__link" target="_blank">${this.source}</a>`;
 
-    this.card.addEventListener('mouseover', this.mouseoverEvent);
+    this.card.addEventListener('mouseover', this._mouseoverEvent);
 
-    this.card.addEventListener('mouseout', this.mouseoutEvent);
+    this.card.addEventListener('mouseout', this._mouseoutEvent);
 
-    this.card.addEventListener('click', this.markArticleIcon);
+    this.card.addEventListener('click', this._markArticleIcon);
     return this.card;
   }
 
-  mouseoverEvent() {
+  _mouseoverEvent() {
     if (JWT_TOKEN) {
       if (event.target.classList.contains('card__button-img')) {
         event.target.setAttribute('src', '../images/savehover.svg');
@@ -54,7 +54,7 @@ export default class NewsCard {
     }
   }
 
-  mouseoutEvent() {
+  _mouseoutEvent() {
     if (JWT_TOKEN) {
       if (event.target.classList.contains('card__button-img')) {
         event.target.setAttribute('src', '../images/save.svg');
@@ -67,13 +67,13 @@ export default class NewsCard {
     }
   }
 
-  markArticleIcon(event) {
+  _markArticleIcon(event) {
     if (JWT_TOKEN) {
       if (event.target.classList.contains('card__button-img')) {
         event.target.setAttribute('src', '../images/savemarked.svg');
         this.api.createArticle(this.keyword, this.title, this.description, this.date, this.source, this.url, this.image);
-        this.card.removeEventListener('mouseout', this.mouseoutEvent);
-        this.card.removeEventListener('mouseover', this.mouseoverEvent);
+        this.card.removeEventListener('mouseout', this._mouseoutEvent);
+        this.card.removeEventListener('mouseover', this._mouseoverEvent);
       }
     }
   }
