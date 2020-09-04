@@ -16,6 +16,7 @@ export default class NewsCard {
     this.mouseoutEvent = this.mouseoutEvent.bind(this);
     this.mouseoverEvent = this.mouseoverEvent.bind(this);
     this.card = document.createElement('div');
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   createCard() {
@@ -92,7 +93,7 @@ export default class NewsCard {
     <img src=${this.image} class="card__img" alt='${this.title}'>
         <div class="card__save-container">
             <button class="card__button">
-                <img src="../images/trash.png" alt="Удалить статью" class="card__button-img card__button-img-2">
+                <img src="../images/trash.png" alt="Удалить статью" class="card__button-img card__button-trash">
             </button>
         </div>
     <p class="card__date">${cardDate}</p>
@@ -100,7 +101,15 @@ export default class NewsCard {
     <p class="card__subtitle">${this.description}</p>
     <a href=${this.url} class="card__link" target="_blank">${this.source}</a>`;
 
-    this.card.addEventListener('click', this.markArticleIcon);
+    this.card.addEventListener('click', this.deleteCard);
     return this.card;
+  }
+
+  deleteCard() {
+    if (event.target.classList.contains('card__button-trash')) {
+      confirm('Вы действительно хотите удалить статью?');
+      this.api.removeArticle(this.id);
+      this.card.remove();
+    }
   }
 }

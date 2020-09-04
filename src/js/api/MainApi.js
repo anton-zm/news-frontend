@@ -108,6 +108,9 @@ export default class MainApi {
   removeArticle(id) {
     return fetch(`${this.apiURL}/articles/${id}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${JWT_TOKEN}`,
+      },
     })
       .then((res) => {
         if (res.ok) {
