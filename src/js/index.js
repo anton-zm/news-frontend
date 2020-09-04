@@ -44,7 +44,7 @@ function mobileMenuHandler() {
 
 function renderCards(array, iter, keyword) {
   for (let i = 0; i < iter; i++) {
-    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi, keyword);
+    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi, keyword, '');
     cardList.addCard(card.createCard());
   }
 }

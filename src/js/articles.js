@@ -4,10 +4,13 @@ import { JWT_TOKEN } from './constants/token';
 import DOM from './constants/DOM';
 import MainApi from './api/MainApi';
 import Header from './components/Header';
+import NewsCardList from './components/NewsCardList';
+import NewsCard from './components/NewsCard';
 
 //
 const mainApi = new MainApi();
 const header = new Header(DOM.headerMenu, DOM.mobileMenu);
+const cardList = new NewsCardList('', DOM.resultContainer, '', '');
 let username = '';
 
 function setHeadings(name, array) {
@@ -17,7 +20,6 @@ function setHeadings(name, array) {
       keywordsArr.push(e.keyword);
     }
   });
-
   const remind = keywordsArr.length - 2;
   const keywordIntro = `${keywordsArr[0]}, ${keywordsArr[1]}`;
   DOM.headings.insertAdjacentHTML(
@@ -27,6 +29,13 @@ function setHeadings(name, array) {
   <p class="saved-headings__keywords">По ключевым словам: <span class="saved-headings__keywords saved-headings__keywords_keyword">${keywordIntro}</span> и
   <span class="saved-headings__keywords saved-headings__keywords_keyword">${remind} другим</span></p>`
   );
+}
+
+function renderCards(array) {
+  for (let i = 0; i < array.length; i++) {
+    const card = new NewsCard(array[i].title, array[i].text, array[i].date, array[i].source, array[i].link, array[i].image, mainApi, array[i].keyword, array[i]._id);
+    cardList.addCard(card.createCardforArticlePage());
+  }
 }
 
 console.log(JWT_TOKEN); // убрать потом
@@ -40,6 +49,8 @@ if (JWT_TOKEN) {
     .catch((err) => console.error(err));
   mainApi.getArticles().then((res) => {
     setHeadings(username, res.data);
+    console.log(res.data);
+    renderCards(res.data);
   });
 } else {
   window.location.reload('./');
