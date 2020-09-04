@@ -52,8 +52,6 @@ export default class Form {
     this.form.reset();
   }
 
-  _getInfo() {}
-
   _setButtonState(state) {
     if (state) {
       this.button.classList.add('popup__button_active');

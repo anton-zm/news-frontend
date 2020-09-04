@@ -8,7 +8,6 @@ export default class Popup {
   close() {
     this.popup.classList.remove('popup_is-opened');
   }
-  setContent() {}
 
   clearContent(form) {
     form.reset();
