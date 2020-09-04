@@ -34,12 +34,6 @@ if (JWT_TOKEN) {
       header.render({ isLoggedIn: true, name: res.name });
     })
     .catch((err) => console.error(err));
-  // mainApi
-  //   .getArticles()
-  //   .then((res) => {
-  //     newsCardList.savedCards = res.data;
-  //   })
-  //   .catch((err) => console.error(err));
 }
 
 // меню для мобилок
@@ -48,11 +42,11 @@ function mobileMenuHandler() {
   DOM.mobileMenu.classList.toggle('mobile-menu_opened');
 }
 
-document.addEventListener('click', (event) => {
-  if (event.target.id === 'exit') {
-    showMenu(false);
-  }
-});
+// document.addEventListener('click', (event) => {
+//   if (event.target.id === 'exit') {
+//     showMenu(false);
+//   }
+// });
 
 function renderCards(array, iter, keyword) {
   for (let i = 0; i < iter; i++) {
@@ -112,6 +106,7 @@ DOM.signInForm.addEventListener('submit', (event) => {
       } else {
         signinPopupInstance.clearContent(event.target);
         signinPopupInstance.close();
+        window.location.reload();
       }
     })
     .catch((err) => {
@@ -176,6 +171,14 @@ DOM.searchForm.addEventListener('submit', (event) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+DOM.headerMenu.addEventListener('click', (event) => {
+  if (event.target.classList.contains('exit') || event.target.classList.contains('mobile-exit')) {
+    header.render({});
+    localStorage.clear();
+    window.location.reload();
+  }
 });
 
 // mobile menu

@@ -13,6 +13,7 @@ export default class NewsCard {
     this.keyword = keyword;
     this.markArticleIcon = this.markArticleIcon.bind(this);
     this.mouseoutEvent = this.mouseoutEvent.bind(this);
+    this.mouseoverEvent = this.mouseoverEvent.bind(this);
     this.card = document.createElement('div');
   }
 
@@ -46,8 +47,10 @@ export default class NewsCard {
         event.target.setAttribute('src', '../images/savehover.svg');
       }
     } else {
-      const iconContainer = this.card.querySelector('.card__save-container');
-      this.renderIcon(iconContainer, unknown);
+      if (event.target.classList.contains('card__button-img')) {
+        const iconContainer = document.querySelector('.card__save-container');
+        this.renderIcon(iconContainer, 'unknown');
+      }
     }
   }
 
@@ -55,6 +58,11 @@ export default class NewsCard {
     if (JWT_TOKEN) {
       if (event.target.classList.contains('card__button-img')) {
         event.target.setAttribute('src', '../images/save.svg');
+      }
+    } else {
+      if (event.target.classList.contains('card__button-img')) {
+        const iconContainer = document.querySelector('.card__save-container');
+        this.renderIcon(iconContainer, '');
       }
     }
   }
@@ -72,9 +80,10 @@ export default class NewsCard {
 
   renderIcon(container, status) {
     if (status === 'unknown') {
-      container.insertAdjacentHTML('afterbegin', '<button class="card__button ">Войдите, чтобы сохранять статьи</button>');
+      container.insertAdjacentHTML('afterbegin', '<button class="card__button card__button_prompt">Войдите, чтобы сохранять статьи</button>');
     } else {
-      container.insertAdjacentHTML('afterbegin', '');
+      const prompt = document.querySelector('.card__button_prompt');
+      prompt.remove();
     }
   }
 }
