@@ -72,6 +72,10 @@ export default class MainApi {
   getArticles() {
     return fetch(`${this.apiURL}/articles`, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${JWT_TOKEN}`,
+      },
     })
       .then((res) => {
         if (res.ok) {

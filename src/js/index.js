@@ -42,12 +42,6 @@ function mobileMenuHandler() {
   DOM.mobileMenu.classList.toggle('mobile-menu_opened');
 }
 
-// document.addEventListener('click', (event) => {
-//   if (event.target.id === 'exit') {
-//     showMenu(false);
-//   }
-// });
-
 function renderCards(array, iter, keyword) {
   for (let i = 0; i < iter; i++) {
     const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi, keyword);
@@ -183,7 +177,11 @@ DOM.headerMenu.addEventListener('click', (event) => {
 
 // mobile menu
 DOM.menuBtn.addEventListener('click', mobileMenuHandler);
-DOM.menuCross.addEventListener('click', mobileMenuHandler);
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('menu-close')) {
+    mobileMenuHandler();
+  }
+});
 
 // copyrigth
 insertCurrentDate();

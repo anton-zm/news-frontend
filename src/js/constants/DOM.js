@@ -11,6 +11,7 @@ export default {
   successPopup: document.querySelector('#success-popup'), // попап успешной регистрации
   signupLink: document.querySelector('#popup__signup-link'), // ссылка "Зарегистрироваться" в форме входа
   menuBtn: document.querySelector('#mobile-menu-icon'), // иконка меню для мобильных
+
   menuCross: document.querySelector('#mobile-cross'), // иконка крестик для мобильных меню
   mobileMenu: document.querySelector('.mobile-menu'), // меню для мобилок
   popup: document.querySelector('.popup'), // любой попап
@@ -47,4 +48,8 @@ export default {
   signUpForm: document.querySelector('#sign-up-form'), // форма регистрации
   signInForm: document.querySelector('#sign-in-form'), // форма входа
   searchForm: document.querySelector('.search'), // форма поиска статей
+
+  // страница статей
+
+  headings: document.querySelector('#articles-page-headings'),
 };
