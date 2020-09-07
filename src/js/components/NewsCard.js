@@ -70,8 +70,9 @@ export default class NewsCard {
   _markArticleIcon(event) {
     if (JWT_TOKEN) {
       if (event.target.classList.contains('card__button-img')) {
-        event.target.setAttribute('src', '../images/savemarked.svg');
-        this.api.createArticle(this.keyword, this.title, this.description, this.date, this.source, this.url, this.image);
+        this.api
+          .createArticle(this.keyword, this.title, this.description, this.date, this.source, this.url, this.image)
+          .then(event.target.setAttribute('src', '../images/savemarked.svg'));
         this.card.removeEventListener('mouseout', this._mouseoutEvent);
         this.card.removeEventListener('mouseover', this._mouseoverEvent);
       }
