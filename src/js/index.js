@@ -21,6 +21,7 @@ const mainApi = new MainApi();
 const newsApi = new NewsApi();
 const signInForm = new Form(DOM.signInForm, DOM.signinButton);
 const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
+const searchForm = new Form(DOM.searchForm, DOM.searchButton);
 const header = new Header(DOM.headerMenu, DOM.mobileMenu);
 const cardList = new NewsCardList(DOM.resultSection, DOM.resultContainer, DOM.techContainer, DOM.resultContent);
 const cardsArray = [];
@@ -49,7 +50,6 @@ function checkCards(array) {
       resultArr.push(i);
     }
   });
-
   return resultArr;
 }
 
@@ -164,6 +164,7 @@ DOM.searchForm.addEventListener('submit', (event) => {
   }
 
   cardList.renderLoader('loading');
+  searchForm.disableForm('off');
   const today = new Date();
   const articlesAgeFrom = dateFormatter.setArticleAge(today, 7);
   const articlesAgeTo = dateFormatter.requestDate(today);
@@ -176,6 +177,7 @@ DOM.searchForm.addEventListener('submit', (event) => {
     .then((res) => {
       console.log(res.articles); // удалить потом
       cardList.renderLoader('stop');
+      searchForm.disableForm('on');
       if (res.status === 'nothing') {
         cardList.renderLoader('nothing');
       }

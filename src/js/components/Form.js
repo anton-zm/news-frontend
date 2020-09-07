@@ -63,4 +63,17 @@ export default class Form {
       this.button.setAttribute('disabled', 'true');
     }
   }
+
+  disableForm(handler) {
+    this.form.removeEventListener('input', this._validateInputElement);
+    if (handler === 'off') {
+      Array.from(this.form.elements).forEach((e) => {
+        e.setAttribute('disabled', true);
+      });
+    } else {
+      Array.from(this.form.elements).forEach((e) => {
+        e.removeAttribute('disabled');
+      });
+    }
+  }
 }
