@@ -42,9 +42,27 @@ function mobileMenuHandler() {
   DOM.mobileMenu.classList.toggle('mobile-menu_opened');
 }
 
-function renderCards(array, iter, keyword) {
+// function renderCards(array, iter, keyword) {
+//   for (let i = 0; i < iter; i++) {
+//     const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi, keyword, '');
+//     cardList.addCard(card.createCard());
+//   }
+// }
+
+function renderCards(array, iter) {
   for (let i = 0; i < iter; i++) {
-    const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi, keyword, '');
+    console.log(DOM.searchInput.value);
+    const card = new NewsCard(
+      array[i].title,
+      array[i].description,
+      array[i].publishedAt,
+      array[i].source.name,
+      array[i].url,
+      array[i].urlToImage,
+      mainApi,
+      DOM.searchInput.value,
+      ''
+    );
     cardList.addCard(card.createCard());
   }
 }
@@ -158,8 +176,9 @@ DOM.searchForm.addEventListener('submit', (event) => {
         cardsArray.push(e);
       });
       cardList.renderResults();
-      renderCards(res.articles, cardsInRow, keyword);
-      cardList.showMore(DOM.resultContainer, renderCards, cardsInRow, res.articles);
+      // renderCards(res.articles, cardsInRow, keyword);
+      renderCards(cardsArray, cardsInRow);
+      // cardList.showMore(DOM.resultContainer, renderCards, cardsInRow, cardsArray);
     })
     .then()
     .catch((err) => {
@@ -185,3 +204,13 @@ document.addEventListener('click', (event) => {
 
 // copyrigth
 insertCurrentDate();
+
+// показать еще
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('result__button')) {
+    clearResults();
+    cardsInRow = cardsInRow + 3;
+    renderCards(cardsArray, cardsInRow);
+  }
+});
