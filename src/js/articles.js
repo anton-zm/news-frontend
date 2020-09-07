@@ -49,11 +49,10 @@ if (JWT_TOKEN) {
     .catch((err) => console.error(err));
   mainApi.getArticles().then((res) => {
     setHeadings(username, res.data);
-    console.log(res.data);
     renderCards(res.data);
   });
 } else {
-  window.location.reload('./');
+  document.location.href = '../';
 }
 
 // меню для мобилок
@@ -72,3 +71,10 @@ document.addEventListener('click', (event) => {
 
 // copyrigth
 insertCurrentDate();
+
+DOM.headerMenu.addEventListener('click', (event) => {
+  if (event.target.classList.contains('exit') || event.target.classList.contains('mobile-exit')) {
+    localStorage.clear();
+    window.location.reload();
+  }
+});

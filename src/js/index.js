@@ -79,6 +79,13 @@ function clearResults() {
   DOM.resultContainer.innerHTML = '';
 }
 
+function hideMoreBtn(btn, resArr) {
+  const renderedCards = document.querySelectorAll('.card');
+  if (renderedCards.length == resArr.length) {
+    btn.classList.add('result__button_hidden');
+  }
+}
+
 // открывают попап входа
 DOM.authBtn.addEventListener('click', () => {
   signinPopupInstance.open();
@@ -223,10 +230,3 @@ document.addEventListener('click', (event) => {
     hideMoreBtn(event.target, checkCards(cardsArray));
   }
 });
-
-function hideMoreBtn(btn, resArr) {
-  const renderedCards = document.querySelectorAll('.card');
-  if (renderedCards.length == resArr.length) {
-    btn.classList.add('result__button_hidden');
-  }
-}
