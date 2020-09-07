@@ -21,7 +21,7 @@ export default class Form {
 
   _validateInputElement(event) {
     const el = event.target;
-    if (el.value === '') {
+    if (el.value === '' && !el.classList.contains('search__input')) {
       el.nextElementSibling.textContent = Errors.REQUIRED;
     } else if (el.name === 'email' && !validator.isEmail(el.value)) {
       el.nextElementSibling.textContent = Errors.EMAIL_ERROR;
