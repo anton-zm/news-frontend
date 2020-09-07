@@ -42,28 +42,36 @@ function mobileMenuHandler() {
   DOM.mobileMenu.classList.toggle('mobile-menu_opened');
 }
 
-// function renderCards(array, iter, keyword) {
-//   for (let i = 0; i < iter; i++) {
-//     const card = new NewsCard(array[i].title, array[i].description, array[i].publishedAt, array[i].source.name, array[i].url, array[i].urlToImage, mainApi, keyword, '');
-//     cardList.addCard(card.createCard());
-//   }
-// }
+function checkCards(array) {
+  const resultArr = [];
+  array.forEach((i) => {
+    if (i.title && i.description && i.publishedAt && i.source.name && i.url && i.urlToImage) {
+      resultArr.push(i);
+    }
+  });
+
+  return resultArr;
+}
 
 function renderCards(array, iter) {
+  if (array.length < iter) {
+    iter = array.length;
+  }
   for (let i = 0; i < iter; i++) {
-    console.log(DOM.searchInput.value);
-    const card = new NewsCard(
-      array[i].title,
-      array[i].description,
-      array[i].publishedAt,
-      array[i].source.name,
-      array[i].url,
-      array[i].urlToImage,
-      mainApi,
-      DOM.searchInput.value,
-      ''
-    );
-    cardList.addCard(card.createCard());
+    if (array[i].title && array[i].description && array[i].publishedAt && array[i].source.name && array[i].url && array[i].urlToImage) {
+      const card = new NewsCard(
+        array[i].title,
+        array[i].description,
+        array[i].publishedAt,
+        array[i].source.name,
+        array[i].url,
+        array[i].urlToImage,
+        mainApi,
+        DOM.searchInput.value,
+        ''
+      );
+      cardList.addCard(card.createCard());
+    }
   }
 }
 
@@ -176,9 +184,7 @@ DOM.searchForm.addEventListener('submit', (event) => {
         cardsArray.push(e);
       });
       cardList.renderResults();
-      // renderCards(res.articles, cardsInRow, keyword);
-      renderCards(cardsArray, cardsInRow);
-      // cardList.showMore(DOM.resultContainer, renderCards, cardsInRow, cardsArray);
+      renderCards(checkCards(cardsArray), cardsInRow);
     })
     .then()
     .catch((err) => {
@@ -211,6 +217,14 @@ document.addEventListener('click', (event) => {
   if (event.target.classList.contains('result__button')) {
     clearResults();
     cardsInRow = cardsInRow + 3;
-    renderCards(cardsArray, cardsInRow);
+    renderCards(checkCards(cardsArray), cardsInRow);
+    hideMoreBtn(event.target, checkCards(cardsArray));
   }
 });
+
+function hideMoreBtn(btn, resArr) {
+  const renderedCards = document.querySelectorAll('.card');
+  if (renderedCards.length == resArr.length) {
+    btn.classList.add('result__button_hidden');
+  }
+}

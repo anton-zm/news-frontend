@@ -21,6 +21,10 @@
   opacity: 0.9;
 }
 
+.result__button_hidden {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .result__button {
     margin: 22px auto 0;

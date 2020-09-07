@@ -4,7 +4,6 @@ export default class NewsCardList {
     this.container = container;
     this.techContainer = techContainer;
     this.titleContainer = titleContainer;
-    // this.showMore = this.showMore.bind(this);
   }
 
   renderResults() {
@@ -26,15 +25,6 @@ export default class NewsCardList {
       this.techContainer.classList.add('tech_hidden');
     }
   }
-
-  // showMore(container, func, i, arr) {
-  //   document.addEventListener('click', (event) => {
-  //     if (event.target.classList.contains('result__button')) {
-  //       container.innerHTML = '';
-  //       func(arr, i + 3);
-  //     }
-  //   });
-  // }
 
   addCard(card) {
     this.container.appendChild(card);
