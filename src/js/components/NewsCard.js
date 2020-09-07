@@ -108,8 +108,7 @@ export default class NewsCard {
   deleteCard() {
     if (event.target.classList.contains('card__button-trash')) {
       confirm('Вы действительно хотите удалить статью?');
-      this.api.removeArticle(this.id);
-      this.card.remove();
+      this.api.removeArticle(this.id).then(this.card.remove());
     }
   }
 }
