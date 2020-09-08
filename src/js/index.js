@@ -24,7 +24,8 @@ const signUpForm = new Form(DOM.signUpForm, DOM.signupButton);
 const searchForm = new Form(DOM.searchForm, DOM.searchButton);
 const header = new Header(DOM.headerMenu, DOM.mobileMenu);
 const cardList = new NewsCardList(DOM.resultSection, DOM.resultContainer, DOM.techContainer, DOM.resultContent);
-const cardsArray = [];
+
+let cardsArray;
 let cardsInRow = 3;
 
 console.log(JWT_TOKEN); // убрать потом
@@ -43,40 +44,32 @@ function mobileMenuHandler() {
   DOM.mobileMenu.classList.toggle('mobile-menu_opened');
 }
 
-function checkCards(array) {
-  const resultArr = [];
-  array.forEach((i) => {
-    if (i.title && i.description && i.publishedAt && i.source.name && i.url && i.urlToImage) {
-      resultArr.push(i);
-    }
-  });
-  return resultArr;
+// очищает контейнер карточек
+function clearResults() {
+  DOM.resultContainer.innerHTML = '';
 }
 
 function renderCards(array, iter) {
+  clearResults();
+  console.log(`Такой массив пришел на рендер: ${array},
+  Первый - ${array[0].title}`);
   if (array.length < iter) {
     iter = array.length;
   }
   for (let i = 0; i < iter; i++) {
-    if (array[i].title && array[i].description && array[i].publishedAt && array[i].source.name && array[i].url && array[i].urlToImage) {
-      const card = new NewsCard(
-        array[i].title,
-        array[i].description,
-        array[i].publishedAt,
-        array[i].source.name,
-        array[i].url,
-        array[i].urlToImage,
-        mainApi,
-        DOM.searchInput.value,
-        ''
-      );
-      cardList.addCard(card.createCard());
-    }
+    const card = new NewsCard(
+      array[i].title,
+      array[i].description,
+      array[i].publishedAt,
+      array[i].source.name,
+      array[i].url,
+      array[i].urlToImage,
+      mainApi,
+      DOM.searchInput.value,
+      ''
+    );
+    cardList.addCard(card.createCard());
   }
-}
-
-function clearResults() {
-  DOM.resultContainer.innerHTML = '';
 }
 
 function hideMoreBtn(btn, resArr) {
@@ -169,20 +162,20 @@ DOM.searchForm.addEventListener('submit', (event) => {
     }, 200);
     return;
   }
-
+  cardsArray = [];
+  cardsInRow = 3;
   cardList.renderLoader('loading');
   searchForm.disableForm('off');
   const today = new Date();
   const articlesAgeFrom = dateFormatter.setArticleAge(today, 7);
   const articlesAgeTo = dateFormatter.requestDate(today);
-  cardsArray.forEach((e) => {
-    cardsArray.pop(e);
-  });
+
   clearResults();
   newsApi
     .getNews(keyword, articlesAgeFrom, articlesAgeTo)
     .then((res) => {
       console.log(res.articles); // удалить потом
+
       cardList.renderLoader('stop');
       searchForm.disableForm('on');
       if (res.status === 'nothing') {
@@ -190,12 +183,13 @@ DOM.searchForm.addEventListener('submit', (event) => {
       }
 
       res.articles.forEach((e) => {
-        cardsArray.push(e);
+        if (e.title && e.description && e.publishedAt && e.source.name && e.url && e.urlToImage) {
+          cardsArray.push(e);
+        }
       });
       cardList.renderResults();
-      renderCards(checkCards(cardsArray), cardsInRow);
+      renderCards(cardsArray, cardsInRow);
     })
-    .then()
     .catch((err) => {
       console.log(err);
     });
@@ -226,7 +220,7 @@ document.addEventListener('click', (event) => {
   if (event.target.classList.contains('result__button')) {
     clearResults();
     cardsInRow = cardsInRow + 3;
-    renderCards(checkCards(cardsArray), cardsInRow);
-    hideMoreBtn(event.target, checkCards(cardsArray));
+    renderCards(cardsArray, cardsInRow);
+    hideMoreBtn(event.target, cardsArray);
   }
 });
